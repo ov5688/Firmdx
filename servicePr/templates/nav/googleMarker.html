@@ -1,0 +1,48 @@
+{% load staticfiles %}
+<head>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAURdzuM6v9QzqP5KqBuRF0k00uFfif3-w"&callback=sample></script>
+    <script>
+
+     var lng = [];
+     lng = {{ lng }};
+     var anz_lng = 0;
+     anz_lng = lng.length;
+
+     var lat = [];
+     lat = {{ lat }};
+     var anz_lat = 0;
+     anz_lat = lat.length;
+
+
+     function loadMap(){
+
+        var mapOptions = {
+           center: new google.maps.LatLng(47.2779739, 8.0774468),
+           zoom: 9
+        };
+
+        var map = new google.maps.Map(document.getElementById("sample"), mapOptions);
+
+        //setMarker
+        for(i = 0; i<=anz_lat; i++){
+
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(lat[i], lng[i]),
+                map: map,
+                animation: google.maps.Animation.BOUNCE,
+                });
+
+            marker.addListener('click', function(){
+                var infowindow = new google.maps.InfoWindow({
+                    content: 'Test',
+                    position: new google.maps.LatLng(lat[i], lng[i]),
+                });
+
+                infowindow.open(map, marker);
+            });
+        }
+
+     }
+
+   </script>
+</head>

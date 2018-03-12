@@ -1,0 +1,52 @@
+{% load staticfiles %}
+<div class="thumbnail" id="bimg" style="font-family:Roboto;">
+
+    <div class="container thumbnail" style="background-color:#dfe3ee; opacity:; max-width:500px; height:450px; margin-top:50px; margin-bottom:100px; margin-right:auto; margin-left:auto;">
+
+        <form action="" method="POST" >{% csrf_token %}
+                <div style="text-align:center;">
+                    <h3  style="font-family:Roboto;">Schnell Experten in ihrer Region finden</h3>
+                    <h3  style="font-family:Roboto;">Einfach Offerten vergleichen</h3>
+                </div>
+                {% if messages %}
+                  <ul class="messages">
+                    {% for message in messages %}
+                      <li class="{{ message.tags }}">{{ message }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+
+                <div style="background-color:#FFFFFF; padding:10px;">
+                    <input type="text" class="form-control" placeholder="8000" maxlength="4" name="query" style="text-align:center; width:100%; opacity:1.5;" autofocus>
+
+                    <select type="button" class="btn btn-secondary" name="select" style="width:100%; text-align:center; font-family:Roboto; border:1px solid grey;">
+                            <div class="">
+                                <option value="X" selected="selected" style="text-align:center;">Branche wählen</option>
+                                <option value="Umzug">Umzug</option>
+                                <option value="Reinigung">Reinigung</option>
+                                <option value="Maler">Maler</option>
+                                <option value="Catering">Catering</option>
+                                <option value="Schreiner">Schreiner</option>
+                                <option value="Architekt">Architekt</option>
+                                <option value="Gartenbau">Gartenbau</option>
+                                <option value="Sanitaer">Sanitär</option>
+                                <option value="Baufirma">Baufirma</option>
+                                <option value="Immobilien">Immobilien</option>
+                            </div>
+                    </select>
+
+                    <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit"  style="width:100%;"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+
+                    <div style="margin-top:20px; font-family:Roboto;">
+                        <h4> <img src="{% static 'img/001-school.png' %}" /> Postleitzahl eintragen</h4>
+                        <hr>
+                        <h4><img src="{% static 'img/002-numbers.png' %}" /> Branche wählen</h4>
+                        <hr>
+                        <h4><img src="{% static 'img/003-three.png' %}" /> Suche starten</h4>
+                    </div>
+                </div>
+        </form>
+    </div>
+</div>

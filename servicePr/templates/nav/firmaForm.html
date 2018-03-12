@@ -1,0 +1,41 @@
+{% extends 'home_show.html' %}
+{% load staticfiles %}
+{% block title %}
+    <br><br><br>
+    <hr>
+        <h2>Firma eintragen</h2>
+    <hr>
+{% endblock %}
+
+{% block body %}
+<br>
+<br>
+<br>
+<div class="container" style="margin-top:50px; margin-bottom:-300px;">
+    <div style="float:right; font-family:Roboto; max-width:40%;">
+        <br>
+        <h4><strong>Gezielt Kunden ansprechen.</strong></h4><br><br>
+        <h4>Hier können Sie ihr Unternehmen bei Firmdx registrieren.</h4>
+        <h4>Durch einen Eintrag bei Firmdx haben potenziell neue
+            Geschäftspartner die Möglichkeit sie dirket mit einer Anfrage zu erreichen.</h4>
+        <h4>Die Anfragen erhalten Sie nach einer Überprüfung über Email zugestellt.</h4>
+        <h4>Sie haben anschliessend, noch die Möglichkeit ihre Firma bei mehreren Branchen anzumelden.</h4>
+        <h4>Weitere Details und Informationen zu Ihrem Eintrag werden zugestellt.</h4>
+    </div>
+
+    <div class="thumbnail">
+        {% if form %}
+            <div style="width:50%;">
+                <form method="POST" action="">{% csrf_token %}
+                    <h4>Firma eintragen</h4>
+                    <hr>
+                    {{ form }}
+                    <input type="submit" value="senden" class="btn" style=" width:100%; background-color:#0B0B3B; color:white;"/>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+
+</div>
+
+{% endblock %}

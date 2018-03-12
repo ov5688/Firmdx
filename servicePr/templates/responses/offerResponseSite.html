@@ -1,0 +1,38 @@
+{% extends 'home_show.html' %}
+{% load staticfiles %}
+
+{% block body %}
+<div class="container">
+    <hr>
+        <h2>Besten Dank {{ form.name }}</h2>
+        <h4>Ihre Anfrage wurde an folgende Unternehmen weitergeleitet.</h4>
+        <h4>Weitere Details finden Sie in ihrem Email Postfach.</h4>
+    <hr>
+    <br><br>
+    <div class="container" style="max-width:400px; float:left;">
+        <h4>Name: <strong>{{ form.name }}</strong></h4>
+        <h4>E-Mail: <strong>{{ form.eMail }}</strong></h4>
+        <h4>Ort: <strong>{{ form.plz }}</strong></h4>
+        <h4>Beschreibung:</h4><br><br> <h5>{{ form.beschreibung }}</h5>
+    </div>
+    <div class="container" style="float:left; width:200px; height:480px;">
+        <h4 style="padding-top:120px;">Gesendet an</h4>
+        <img src="{% static 'img/chevron.png' %}">
+    </div>
+    {% for f in mail_list %}
+       <div class="container thumbnail" style="max-width:250px; max-height:150px; float:left;">
+
+           <div class="container" style="max-width:200px;">
+               <div class="container" style="max-width:200px;">
+                   <img src='{{ f.firm_logo.url }}' class="img-responsive" alt="Responsive image" style="max-width:80px;"/>
+               </div>
+                <div class="container" style="max-width:250px;">
+                    <h4>{{ f.name }}</h4>
+                </div>
+            </div>
+
+       </div>
+    {% endfor %}
+</div>
+{% endblock %}
+

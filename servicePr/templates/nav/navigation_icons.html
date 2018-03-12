@@ -1,0 +1,56 @@
+{% load staticfiles %}
+<div class="container thumbnail" style="border:none; font-family:Roboto;">
+    <a href="{% url 'umzug' %}">
+        <div class="col-sm-3 col-xs-4 col-md-1 thumbnail nav_icons_deco">
+            Umzug<img src="{% static 'img/003-tool.png' %}" class="search-icon" />
+        </div>
+    </a>
+
+    <a href="{% url 'reinigung' %}">
+        <div class="col-sm-3 col-xs-4 col-md-1 thumbnail nav_icons_deco">
+            Reinigung<img src="{% static 'img/004-tool.png' %}" class="search-icon">
+        </div>
+    </a>
+
+    <a href="{% url 'maler' %}">
+        <div class="col-sm-3 col-xs-4 col-md-1 thumbnail nav_icons_deco">
+            Maler<img src="{% static 'img/003-roller.png' %}" class="search-icon">
+        </div>
+    </a>
+
+    <a href="{% url 'sanitaer' %}">
+        <div class="col-sm-3 col-xs-4 col-md-1 thumbnail nav_icons_deco">
+            Sanitär <img src="{% static 'img/sanitary.png' %}" class="search-icon">
+        </div>
+    </a>
+
+    <a href="{% url 'schreiner' %}">
+        <div class="col-xs-4 col-sm-3 col-md-1 thumbnail nav_icons_deco">
+            Schreiner<img src="{% static 'img/001-hammer.png' %}" class="search-icon">
+        </div>
+    </a>
+
+    <a href="{% url 'architekt' %}">
+        <div class="col-xs-4 col-sm-3 col-md-1 thumbnail nav_icons_deco">
+            Architekt<img src="{% static 'img/002-tools.png' %}" class="search-icon">
+        </div>
+    </a>
+
+    <a href="{% url 'baufirma' %}">
+        <div class="col-sm-3 col-xs-4 col-md-1 thumbnail nav_icons_deco">
+            Baufirmen <img src="{% static 'img/004-construction-1.png' %}" class="search-icon">
+        </div>
+     </a>
+
+    <a href="{% url 'immobilien' %}">
+        <div class="col-sm-3 col-xs-4 col-md-1 thumbnail nav_icons_deco">
+            Immobilien  <img src="{% static 'img/001-construction.png' %}" class="search-icon">
+        </div>
+    </a>
+
+    <a href="{% url 'gartenbau' %}">
+        <div class="col-sm-3 col-xs-4 col-md-1 thumbnail nav_icons_deco">
+            Gartenbau <img src="{% static 'img/002-travel.png' %}" class="search-icon">
+        </div>
+    </a>
+</div>
