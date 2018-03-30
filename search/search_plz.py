@@ -12,20 +12,26 @@ class Search:
 
         distance = GeoCoords()
         distance = distance.distance_matrix(search_input, firm_list)
+        ord_list = []
+        dist = []
+        for key in distance:
+            for f in firm_list:
+                if key[0] == f.id:
+                    ord_list.append(f)
+                    dist.append(key[1])
 
-        print("distances: ", distance)
-
-        vector = SearchVector('plz')
-        query = SearchQuery(self.search_input)
-
-        # branch_firms = firm_list.annotate(rank=SearchRank(vector, query)).order_by('-rank')
-        branch_firms = firm_list.annotate(similarity=TrigramSimilarity('plz', search_input)).filter(similarity__gt=0.2).order_by('-similarity')
-        branch_firms = list(branch_firms)
-        firm_list = list(firm_list)
-
-        for firm in firm_list:
-            if firm not in branch_firms:
-                branch_firms.append(firm)
+        print("ORD_LIST EXTENDS DISTANCE -------> ", ord_list)
+        # vector = SearchVector('plz')
+        # query = SearchQuery(self.search_input)
+        #
+        # # branch_firms = firm_list.annotate(rank=SearchRank(vector, query)).order_by('-rank')
+        # branch_firms = firm_list.annotate(similarity=TrigramSimilarity('plz', search_input)).filter(similarity__gt=0.2).order_by('-similarity')
+        # branch_firms = list(branch_firms)
+        # firm_list = list(firm_list)
+        #
+        # for firm in firm_list:
+        #     if firm not in branch_firms:
+        #         branch_firms.append(firm)
 
         # branch_firms = firm_list.annotate(distance=TrigramDistance('plz', search_input)).filter(distance__lte=0.7).order_by('distance')
         # https://docs.djangoproject.com/en/1.11/topics/db/queries/
@@ -34,4 +40,4 @@ class Search:
         #                                 ).annotate(rank=SearchRank(vector, query)).order_by('-rank')
         # branch_firms = firm_list.annotate(similarity=TrigramSimilarity('plz', search_input),).filter(similarity__gt=0.3).order_by('-similarity')
 
-        return branch_firms
+        return (ord_list, dist)

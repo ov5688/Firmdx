@@ -1,6 +1,8 @@
 {% extends 'home_show.html' %}
 {% load staticfiles %}
+
 {% block title %}
+
 
     <div id="txt_main" class="row container" style="margin:auto; margin-top:50px; text-align:center; font-family:Roboto;">
 
@@ -89,6 +91,7 @@
                             <button class="btn responsive" id="{{ firma.name }}" value="{{ firma.eMail }}" onclick="myFunction(this)"
                                     style="background-color:#dfe3ee; width:100%; border:none; font-size:1em; font-size:80%; font-family:Roboto;"><strong>hinzufügen</strong>
                             </button>
+                            Entfernung : {{ distance.firma }}
                         </div>
                     </div>
                 </div>

@@ -87,7 +87,7 @@ def show(request, name):
     if q and q.isnumeric() and len(q) == 4:
         search = Search()
         lat, lng = geocode[n]
-        firm_search = search.filter_plz(f, q)
+        firm_search, dist = search.filter_plz(f, q)
 
         # PAGINATOR
         firm_search = pagi(request, firm_search, 30)
@@ -100,6 +100,7 @@ def show(request, name):
             'form': form,
             'lat': lat,
             'lng': lng,
+            'distance': dist,
             'anz': len(firm_search),
             'anz_f': firm_list.count(),
             'anz_a': a.count()*3

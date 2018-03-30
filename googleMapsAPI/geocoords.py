@@ -4,7 +4,6 @@ from servicePr.firm import Firmeneintrag_new
 # from operator import itemgetter
 
 geocode = dict()
-dist_t = {}
 
 class GeoCoords:
 
@@ -13,15 +12,14 @@ class GeoCoords:
 
     def distance_matrix(self, query, list):
         gmaps = googlemaps.Client(key=GOOGLE_DISTANCE_KEY)
-
+        dist_t = {}
         plz = []
-        for l in list:
-            plz.append(l.plz)
-            dist = gmaps.distance_matrix(str(query) + ", Schweiz", str(l.plz) + ", Schweiz")
-            dist_t[l.id] = dist['rows'][0]['elements'][0]['distance']['value']
-            print(dist_t)
 
-        # sorted(dist_t.items(), key=lambda dist_t:dist_t[1], reverse=False)
+        for l in list:
+            distances = gmaps.distance_matrix(str(query) + ", Schweiz", str(l.plz) + ", Schweiz")
+            dist_t[l.id] = distances['rows'][0]['elements'][0]['distance']['value']
+
+        dist_t = sorted(dist_t.items(), key=lambda x : int(x[1]), reverse=False)
         return dist_t
 
     def latLng(self, branche):
