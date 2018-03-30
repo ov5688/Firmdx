@@ -58,12 +58,11 @@ def show(request, name):
     global firm_list
     n = name
     q = request.POST.get("query")
-    page = request.GET.get('page', 1)
 
     firma = Firmeneintrag_new()
     f = firma.getFirm(n, firm_list)
     f_mix = list(f)
-    # random.shuffle(f_mix)
+    random.shuffle(f_mix)
 
     lat, lng = geocode[n]
     form = Anfrage()
@@ -90,14 +89,8 @@ def show(request, name):
         lat, lng = geocode[n]
         firm_search = search.filter_plz(f, q)
 
-        paginator = Paginator(firm_search, 30)
-
-        try:
-            firm_search = paginator.page(page)
-        except PageNotAnInteger:
-            firm_search = paginator.page(1)
-        except EmptyPage:
-            firm_search = paginator.page(paginator.num_pages)
+        # PAGINATOR
+        firm_search = pagi(request, firm_search, 30)
 
         context = {
             's_id': request.session.session_key,
@@ -107,7 +100,7 @@ def show(request, name):
             'form': form,
             'lat': lat,
             'lng': lng,
-            'anz': search.filter_plz(f, q).count(),
+            'anz': len(firm_search),
             'anz_f': firm_list.count(),
             'anz_a': a.count()*3
         }
@@ -118,14 +111,8 @@ def show(request, name):
     elif q and q.isnumeric() == False:
         messages.warning(request, 'Schweizer Postleitzahl eintragen. Beispiel: "8000" für Zürich')
 
-    paginator = Paginator(f_mix, 30)
-
-    try:
-        f_mix = paginator.page(page)
-    except PageNotAnInteger:
-        f_mix = paginator.page(1)
-    except EmptyPage:
-        f_mix = paginator.page(paginator.num_pages)
+    # PAGINATOR
+    f_mix = pagi(request, f_mix, 30)
 
     context = {
         's_id': request.session.session_key,
@@ -141,6 +128,35 @@ def show(request, name):
 
     return render(request, 'branchen/show.html', context)
 
+def pagi(request, f, anz):
+
+    page = request.GET.get('page', 1)
+    paginator = Paginator(f, anz)
+
+    try:
+        f = paginator.page(page)
+    except PageNotAnInteger:
+        f = paginator.page(1)
+    except EmptyPage:
+        f = paginator.page(paginator.num_pages)
+
+    return f
+# ****FIRMFORM
+def firmaForm(request):
+    form = EintragFormular()
+    if request.POST.get("name"):
+        form = EintragFormular(request.POST)
+        if form.is_valid():
+            form.save(commit=True)
+            return render(request, 'nav/form_bestaetigung.html', {})
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'nav/firmaForm.html', context)
+
+############################### INFOSITES ######################################
 
 def impressum(request):
 
@@ -172,19 +188,3 @@ def kontakt(request):
     }
 
     return render(request, 'nav/kontakt.html', context)
-
-
-# ****FORM****
-def firmaForm(request):
-    form = EintragFormular()
-    if request.POST.get("name"):
-        form = EintragFormular(request.POST)
-        if form.is_valid():
-            form.save(commit=True)
-            return render(request, 'nav/form_bestaetigung.html', {})
-
-    context = {
-        'form': form,
-    }
-
-    return render(request, 'nav/firmaForm.html', context)

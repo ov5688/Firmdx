@@ -1,17 +1,32 @@
 import googlemaps
-from HT import GOOGLE_KEY
+from HT import GOOGLE_KEY, GOOGLE_DISTANCE_KEY
 from servicePr.firm import Firmeneintrag_new
+# from operator import itemgetter
 
 geocode = dict()
+dist_t = {}
 
 class GeoCoords:
 
     def __init__(self):
         self.data = []
 
+    def distance_matrix(self, query, list):
+        gmaps = googlemaps.Client(key=GOOGLE_DISTANCE_KEY)
+
+        plz = []
+        for l in list:
+            plz.append(l.plz)
+            dist = gmaps.distance_matrix(str(query) + ", Schweiz", str(l.plz) + ", Schweiz")
+            dist_t[l.id] = dist['rows'][0]['elements'][0]['distance']['value']
+            print(dist_t)
+
+        # sorted(dist_t.items(), key=lambda dist_t:dist_t[1], reverse=False)
+        return dist_t
+
     def latLng(self, branche):
 
-        gmaps = googlemaps.Client(key=GOOGLE_KEY)
+        gmaps = googlemaps.Client(key=GOOGLE_DISTANCE_KEY)
         lat = []
         lng = []
 

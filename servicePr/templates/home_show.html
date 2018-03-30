@@ -62,10 +62,13 @@
     {% endif%}
 
     {% include 'nav/googleMarker.html' %}
-    <div id="sample" style="width:100%; height:800px;">
 
-    </div>
+    {% if  lat %}
+      <div id="sample" style="width:100%; height:800px;">
 
+      </div>
+    {% endif %}
+    
     <div style="bottom:0;">
       {% include 'nav/footer-address-phones.html' %}
     </div>

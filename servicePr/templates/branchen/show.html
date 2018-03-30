@@ -24,19 +24,19 @@
 {% endblock %}
 {% block body %}
     <!--background-color:#292c2f;-->
-    <div class="container-fluid" style="background-color:#292c2f;">
+    <div class="container-fluid" style="background-color:;">
 
-        <div class="container" style="text-align:center; background:transparent; font-family:Roboto; margin-top:50px; color:white;">
+        <div class="container" style="text-align:center; background:transparent; font-family:Roboto; margin-top:50px; color:;">
             <h3>
                 {{ title }} Ergebnisse{% if query %}: Suche "{{ query }}" und Umgebung{% endif %}
             </h3>
         </div>
         <div class="container"><br><br>
-            <div class="thumbnail" style="float:left; background:transparent; color:white; border:none;">
+            <div class="thumbnail" style="float:left; background:transparent; color:; border:none;">
                 <img src="{% static 'img/question.png' %}" style="max-height:20px; float:left;"/>
                 <text style="margin-left:20px;">Klicke auf das Symbol um eine Kurzinfo über die Firma zu erhalten.</text>
             </div>
-            <div class="thumbnail" style="float:left; background:transparent; color:white; border:none;">
+            <div class="thumbnail" style="float:left; background:transparent; color:; border:none;">
                 <button class="btn responsive" style="margin-left:20px; background-color:#dfe3ee; width:100px; border:none; color:black; font-size:80%;"><strong>hinzufügen</strong></button>
                 <text style="margin-left:20px;">Klicke auf hinzufügen um die jeweilige Firma in die Anfrageliste hinzuzufügen</text>
             </div>
@@ -186,7 +186,7 @@
             $(window).bind('resize', function(e)
             {
               console.log('window resized..');
-              this.location.reload(false); /* false to get page from cache */
+              // this.location.reload(false); /* false to get page from cache */
               /* true to fetch page from server */
             });
 
@@ -221,11 +221,8 @@
                     }
                  }
                  else{
-                    <!--Anfrageformular: background-->
-                    $('#form-back').addClass('col-xs-12 col-sm-4').css('max-width','');
-
+                   $('#form-back').addClass('col-xs-12 col-sm-4 col-md-3').css('max-width','');
                  }
-
             });
 
             // scroll body to 0px on click

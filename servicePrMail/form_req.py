@@ -49,7 +49,6 @@ class SendMassMail:
             t = TempEMail.objects.filter(tempMail=cmail)
 
             if t:
-                print("TRUE: t")
                 return 0
 
             TempEMail.objects.create(tempMail=cmail)
@@ -67,7 +66,6 @@ class SendMassMail:
             m = 0
             while m < len(mailList):
                 send_mail(subject, message, send_from, [mailList[m]])
-                print(m)
                 f += Firma.objects.filter(eMail=mailList[m])
 
                 m += 1
