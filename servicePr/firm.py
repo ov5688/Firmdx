@@ -28,21 +28,3 @@ class Firmeneintrag_new:
         firm_list = firm_list.filter(branche=branche_auswahl)
 
         return firm_list
-
-    # def pagi(self, request, firm_list):
-    #
-    #     self.request = request
-    #     self.firm_list = firm_list
-    #
-    #     paginator = Paginator(firm_list, 6)
-    #     page = request.GET.get('page')
-    #
-    #     try:
-    #         sites = paginator.page(page)
-    #     except PageNotAnInteger:
-    #         # If page is not an integer, deliver first page.
-    #         sites = paginator.page(1)
-    #     except EmptyPage:
-    #         # If page is out of range (e.g. 9999), deliver last page of results.
-    #         sites = paginator.page(paginator.num_pages)
-    #     return sites

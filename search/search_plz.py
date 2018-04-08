@@ -12,15 +12,17 @@ class Search:
 
         distance = GeoCoords()
         distance = distance.distance_matrix(search_input, firm_list)
+
         ord_list = []
         dist = []
-        for key in distance:
-            for f in firm_list:
-                if key[0] == f.id:
-                    ord_list.append(f)
-                    dist.append(key[1])
 
-        print("ORD_LIST EXTENDS DISTANCE -------> ", ord_list)
+        for d in distance:
+            for f in firm_list:
+                if d[0] == f.id:
+                    ord_list.append(f)
+                    dist.append(d[1])
+
+        # print("ORD_LIST EXTENDS DISTANCE -------> ", ord_list)
         # vector = SearchVector('plz')
         # query = SearchQuery(self.search_input)
         #

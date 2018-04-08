@@ -26,19 +26,19 @@
 {% endblock %}
 {% block body %}
     <!--background-color:#292c2f;-->
-    <div class="container-fluid" style="background-color:;">
+    <div class="container-fluid" style="background-color:#292c2f;">
 
-        <div class="container" style="text-align:center; background:transparent; font-family:Roboto; margin-top:50px; color:;">
+        <div class="container" style="text-align:center; background:transparent; font-family:Roboto; margin-top:50px; color:white;">
             <h3>
                 {{ title }} Ergebnisse{% if query %}: Suche "{{ query }}" und Umgebung{% endif %}
             </h3>
         </div>
         <div class="container"><br><br>
-            <div class="thumbnail" style="float:left; background:transparent; color:; border:none;">
+            <div class="thumbnail" style="float:left; background:transparent; color:white; border:none;">
                 <img src="{% static 'img/question.png' %}" style="max-height:20px; float:left;"/>
                 <text style="margin-left:20px;">Klicke auf das Symbol um eine Kurzinfo über die Firma zu erhalten.</text>
             </div>
-            <div class="thumbnail" style="float:left; background:transparent; color:; border:none;">
+            <div class="thumbnail" style="float:left; background:transparent; color:white; border:none;">
                 <button class="btn responsive" style="margin-left:20px; background-color:#dfe3ee; width:100px; border:none; color:black; font-size:80%;"><strong>hinzufügen</strong></button>
                 <text style="margin-left:20px;">Klicke auf hinzufügen um die jeweilige Firma in die Anfrageliste hinzuzufügen</text>
             </div>
@@ -91,7 +91,7 @@
                             <button class="btn responsive" id="{{ firma.name }}" value="{{ firma.eMail }}" onclick="myFunction(this)"
                                     style="background-color:#dfe3ee; width:100%; border:none; font-size:1em; font-size:80%; font-family:Roboto;"><strong>hinzufügen</strong>
                             </button>
-                            Entfernung : {{ distance.firma }}
+                              Entfernung :<h4>{{ distance.firma }}</h4>
                         </div>
                     </div>
                 </div>

@@ -9,6 +9,7 @@ from .models_new import Firma
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import random
 from django.contrib import messages
+from HT import GOOGLE_KEY
 
 firm_list = Firma.objects.all()
 a = OffertenAnfrage.objects.all()
@@ -56,6 +57,9 @@ def index(request):
 def show(request, name):
 
     global firm_list
+    global geocode
+    print(geocode)
+
     n = name
     q = request.POST.get("query")
 
@@ -64,7 +68,7 @@ def show(request, name):
     f_mix = list(f)
     random.shuffle(f_mix)
 
-    lat, lng = geocode[n]
+    lat, lng, firm_id = geocode[n]
     form = Anfrage()
 
     # Anfrageformular
@@ -78,7 +82,8 @@ def show(request, name):
 
         context = {
             'mail_list': mail_list,
-            'form': request.POST
+            'form': request.POST,
+            'GOOGLE_KEY': GOOGLE_KEY
         }
 
         return render(request, 'responses/offerResponseSite.html', context)
@@ -86,16 +91,22 @@ def show(request, name):
     # Suche nach Postleitzahl
     if q and q.isnumeric() and len(q) == 4:
         search = Search()
-        lat, lng = geocode[n]
+        lat, lng, firm_id = geocode[n]
+
         firm_search, dist = search.filter_plz(f, q)
 
+        #GET DISTANCE WITH MATH
+        # dist_math = geo.get_distance(q, geocode[n], firm_search)
+        # dist_math.sort()
+        # print("DIST_MATH : ", dist_math)
+
         # PAGINATOR
-        firm_search = pagi(request, firm_search, 30)
+        # firm_search = pagi(request, firm_search, 30)
 
         context = {
             's_id': request.session.session_key,
             'title': n,
-            'firma_new': firm_search,
+            'firma_new': firm_search[:30],
             'query': q,
             'form': form,
             'lat': lat,
@@ -103,7 +114,8 @@ def show(request, name):
             'distance': dist,
             'anz': len(firm_search),
             'anz_f': firm_list.count(),
-            'anz_a': a.count()*3
+            'anz_a': a.count()*3,
+            'GOOGLE_KEY':GOOGLE_KEY
         }
 
         return render(request, 'branchen/show.html', context)
@@ -113,18 +125,19 @@ def show(request, name):
         messages.warning(request, 'Schweizer Postleitzahl eintragen. Beispiel: "8000" für Zürich')
 
     # PAGINATOR
-    f_mix = pagi(request, f_mix, 30)
+    # f_mix = pagi(request, f_mix, 30)
 
     context = {
         's_id': request.session.session_key,
         'title': n,
-        'firma_new': f_mix,
+        'firma_new': f_mix[:30],
         'form': form,
         'lat': lat,
         'lng': lng,
         'anz': f.count(),
         'anz_f': firm_list.count(),
-        'anz_a': a.count()*3
+        'anz_a': a.count()*3,
+        'GOOGLE_KEY':GOOGLE_KEY
     }
 
     return render(request, 'branchen/show.html', context)
@@ -142,6 +155,7 @@ def pagi(request, f, anz):
         f = paginator.page(paginator.num_pages)
 
     return f
+
 # ****FIRMFORM
 def firmaForm(request):
     form = EintragFormular()
