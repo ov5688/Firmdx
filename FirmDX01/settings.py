@@ -26,7 +26,6 @@ SECRET_KEY = DJANGO_SECRET_KEY
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 #
 # EMAIL_USE_TLS = True
