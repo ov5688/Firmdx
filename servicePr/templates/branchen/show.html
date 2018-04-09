@@ -85,13 +85,14 @@
                                     <small>{{ firma.homepage }}</small>
                                 </h5>
                             </a>
+                            <h4>{{ loop.index }}</h4>
                             <div class="thumbnail" style="border:none;">
-                                <!-- <h6>Bewertung:<img src="{% static 'img/4-stars.jpg' %}" width="100px">  <text style="float:right;">[ 4.6/5 ] (150)</text></h6> -->
+                                <h6>Bewertung:<img src="{% static 'img/4-stars.jpg' %}" width="100px">  <text style="float:right;">[ 4.6/5 ] (150)</text></h6>
                             </div>
                             <button class="btn responsive" id="{{ firma.name }}" value="{{ firma.eMail }}" onclick="myFunction(this)"
                                     style="background-color:#dfe3ee; width:100%; border:none; font-size:1em; font-size:80%; font-family:Roboto;"><strong>hinzufügen</strong>
                             </button>
-                              Entfernung :<h4>{{ distance.firma }}</h4>
+
                         </div>
                     </div>
                 </div>

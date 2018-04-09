@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'servicePrMail',
     'googleMapsAPI',
     'search',
+    'multiselectfield',
     'simple_email_confirmation',
 ]
 

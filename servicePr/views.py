@@ -83,7 +83,6 @@ def show(request, name):
         context = {
             'mail_list': mail_list,
             'form': request.POST,
-            'GOOGLE_KEY': GOOGLE_KEY
         }
 
         return render(request, 'responses/offerResponseSite.html', context)
@@ -92,7 +91,7 @@ def show(request, name):
     if q and q.isnumeric() and len(q) == 4:
         search = Search()
         lat, lng, firm_id = geocode[n]
-
+        print(firm_id)
         firm_search, dist = search.filter_plz(f, q)
 
         #GET DISTANCE WITH MATH
@@ -115,7 +114,8 @@ def show(request, name):
             'anz': len(firm_search),
             'anz_f': firm_list.count(),
             'anz_a': a.count()*3,
-            'GOOGLE_KEY':GOOGLE_KEY
+            'id': firm_id,
+            'GOOGLE_KEY': GOOGLE_KEY
         }
 
         return render(request, 'branchen/show.html', context)
@@ -137,7 +137,8 @@ def show(request, name):
         'anz': f.count(),
         'anz_f': firm_list.count(),
         'anz_a': a.count()*3,
-        'GOOGLE_KEY':GOOGLE_KEY
+        'id': firm_id,
+        'GOOGLE_KEY': GOOGLE_KEY
     }
 
     return render(request, 'branchen/show.html', context)
@@ -159,7 +160,8 @@ def pagi(request, f, anz):
 # ****FIRMFORM
 def firmaForm(request):
     form = EintragFormular()
-    if request.POST.get("name"):
+    if request.POST:
+        print("Request Firmeneintrag")
         form = EintragFormular(request.POST)
         if form.is_valid():
             form.save(commit=True)
