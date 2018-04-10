@@ -1,6 +1,5 @@
 {% load staticfiles %}
-<head>
-  <script src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_KEY }}"&callback=sample></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_KEY }}"&callback=sample></script>
     <script>
 
      var lng = [];
@@ -11,29 +10,31 @@
      var anz_lat = 0;
      anz_lat = lat.length;
 
-     var id = [];
-     id = {{ id }};
-     console.log(id);
+     var firm_id = [];
+     firm_id = {{ firm_id }};
+     console.log("Firm ID", firm_id);
+
+     var firm = [];
+     firm = '{{ firm_name }}';
+     firm = firm.split('&gt;');
 
      function loadMap(){
 
-        var mapOptions = {
-           center: new google.maps.LatLng(47.2779739, 8.0774468),
-           zoom: 9
-        };
+      var mapOptions = {
+         center: new google.maps.LatLng(47.2779739, 8.0774468),
+         zoom: 9
+      };
 
-        var map = new google.maps.Map(document.getElementById("sample"), mapOptions);
+      var map = new google.maps.Map(document.getElementById("sample"), mapOptions);
 
-        //setMarker
-        for(i = 0; i<=anz_lat; i++){
-            var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(lat[i], lng[i]),
-                map: map,
-                animation: google.maps.Animation.DROP,
-                label: id[i],
-                });
-            console.log(id[i]);
-            }
-        }
-   </script>
-</head>
+      //setMarker
+      for(i = 0; i<=anz_lat; i++){
+          var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(lat[i], lng[i]),
+            map: map,
+            animation: google.maps.Animation.BOUNCE,
+            title: firm[i].substring(12),
+          });
+      }
+    }
+</script>

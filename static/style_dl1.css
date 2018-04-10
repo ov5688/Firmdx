@@ -7,26 +7,17 @@
     margin-top:100px;
 }
 
-body{
-    font-family:Roboto;
-}
-
 #bimg{
     background-image: url('img/mountains.jpg');
     display:block;
     right:0;
     left:0;
+    font-family:Roboto;
 }
 
 #header_pic{
     margin-right: 0em;
     margin-left: 0em;
-}
-#info1 a: hover{
-    text-decoration:none;
-    background-color:white;
-    color:black;
-    border-radius:5px;
 }
 
 .info{
@@ -38,6 +29,13 @@ body{
     color:black;
     text-decoration:none;
     text-align:center;
+    margin:15px;
+    border:none;
+}
+
+.nav_icons_deco:hover{
+    background-color:#F5F5F5;
+    box-shadow:1px 1px 1px 1px lightgrey;
 }
 
 #infos{
@@ -47,21 +45,10 @@ body{
     margin-top:50px;
 }
 
-// Class
-.center-block {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-// Usage as a mixin
-.element {
-  .center-block();
-}
-
 .search-icon{
     width:40px;
     height:40px;
-    margin:5px;
+    margin:10px;
 }
 .inside-td{
     width:100px;
@@ -88,7 +75,6 @@ body{
 	width: 100%;
 	text-align: left;
 	font: bold 16px sans-serif;
-
 	padding: 55px 50px;
 }
 

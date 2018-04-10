@@ -26,19 +26,19 @@
 {% endblock %}
 {% block body %}
     <!--background-color:#292c2f;-->
-    <div class="container-fluid" style="background-color:#292c2f;">
+    <div class="container-fluid" style="background-color:;">
 
-        <div class="container" style="text-align:center; background:transparent; font-family:Roboto; margin-top:50px; color:white;">
+        <div class="container" style="text-align:center; background:transparent; font-family:Roboto; margin-top:50px; color:;">
             <h3>
                 {{ title }} Ergebnisse{% if query %}: Suche "{{ query }}" und Umgebung{% endif %}
             </h3>
         </div>
         <div class="container"><br><br>
-            <div class="thumbnail" style="float:left; background:transparent; color:white; border:none;">
+            <div class="thumbnail" style="float:left; background:transparent; color:; border:none;">
                 <img src="{% static 'img/question.png' %}" style="max-height:20px; float:left;"/>
                 <text style="margin-left:20px;">Klicke auf das Symbol um eine Kurzinfo über die Firma zu erhalten.</text>
             </div>
-            <div class="thumbnail" style="float:left; background:transparent; color:white; border:none;">
+            <div class="thumbnail" style="float:left; background:transparent; color:; border:none;">
                 <button class="btn responsive" style="margin-left:20px; background-color:#dfe3ee; width:100px; border:none; color:black; font-size:80%;"><strong>hinzufügen</strong></button>
                 <text style="margin-left:20px;">Klicke auf hinzufügen um die jeweilige Firma in die Anfrageliste hinzuzufügen</text>
             </div>
@@ -67,7 +67,7 @@
         <div class="thumbnail" id="show_container" style="width:70%; float:right; background:transparent; border:none;">
             {% for firma in firma_new %}
                  <div class="col-xs-12 col-md-4 col-sm-4">
-                    <div class="thumbnail" style="background-color:#F5F5F5;">
+                    <div class="thumbnail" style="background-color:;">
                         <div class="thumbnail" style="border:none;">
                             <a tabindex="0"  role="button" data-toggle="popover" data-placement="bottom" data-trigger="focus" id="{{ firma.id }}"
                                title="{{ firma.name }} {{ firma.plz }} {{ firma.ort }} ................................................."
@@ -90,7 +90,7 @@
                                 <h6>Bewertung:<img src="{% static 'img/4-stars.jpg' %}" width="100px">  <text style="float:right;">[ 4.6/5 ] (150)</text></h6>
                             </div>
                             <button class="btn responsive" id="{{ firma.name }}" value="{{ firma.eMail }}" onclick="myFunction(this)"
-                                    style="background-color:#dfe3ee; width:100%; border:none; font-size:1em; font-size:80%; font-family:Roboto;"><strong>hinzufügen</strong>
+                                    style="background-color:#00468C; color:white; width:100%; border:none; font-size:1em; font-size:80%; font-family:Roboto;"><strong>hinzufügen</strong>
                             </button>
 
                         </div>
@@ -145,9 +145,9 @@
 
             for(i = 0; i <= index; i++){
                  if (("+ "+objValue.id + "\n") == res[i]){
-                    objValue.style.background = "#dfe3ee";
+                    objValue.style.background = "#00468C";
                     objValue.innerHTML = "hinzufügen";
-                    objValue.style.color = "black";
+                    objValue.style.color = "white";
                     mailList.splice(i, 1);
                     res.splice(i, 1);
                     e.innerHTML = res;
@@ -163,9 +163,9 @@
             }
 
             if (index < 5){
-                objValue.style.background = "#00468C";
-                objValue.style.color = "white";
-                objValue.innerHTML = "von der Liste löschen";
+                objValue.style.background = "";
+                objValue.style.color = "black";
+                objValue.innerHTML = "entfernen";
 
                 {% for firm in firma_new %}
                     if ("{{ firm.name }}" == objValue.id) {

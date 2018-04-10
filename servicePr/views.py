@@ -58,7 +58,6 @@ def show(request, name):
 
     global firm_list
     global geocode
-    print(geocode)
 
     n = name
     q = request.POST.get("query")
@@ -70,6 +69,12 @@ def show(request, name):
 
     lat, lng, firm_id = geocode[n]
     form = Anfrage()
+
+    firm_name = []
+    for f_search in f:
+        for id in firm_id:
+            if f_search.id == id:
+                firm_name.append(f_search)
 
     # Anfrageformular
     if request.POST.get("name"):
@@ -93,6 +98,15 @@ def show(request, name):
         lat, lng, firm_id = geocode[n]
         print(firm_id)
         firm_search, dist = search.filter_plz(f, q)
+        firm_search_name = firm_search
+
+        firm_name = []
+        for f_search in firm_search:
+            for id in firm_id:
+                if f_search.id == id:
+                    firm_name.append(f_search)
+        print("FIRM_NAME: ", firm_name)
+
 
         #GET DISTANCE WITH MATH
         # dist_math = geo.get_distance(q, geocode[n], firm_search)
@@ -114,7 +128,8 @@ def show(request, name):
             'anz': len(firm_search),
             'anz_f': firm_list.count(),
             'anz_a': a.count()*3,
-            'id': firm_id,
+            'firm_id': firm_id,
+            'firm_name': firm_name,
             'GOOGLE_KEY': GOOGLE_KEY
         }
 
@@ -137,7 +152,8 @@ def show(request, name):
         'anz': f.count(),
         'anz_f': firm_list.count(),
         'anz_a': a.count()*3,
-        'id': firm_id,
+        'firm_name': firm_name,
+        'firm_id': firm_id,
         'GOOGLE_KEY': GOOGLE_KEY
     }
 
